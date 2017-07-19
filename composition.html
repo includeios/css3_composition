@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>布局相关样式</title>
+    <style>
+        body *:not(h3){
+            font-family: 楷体;
+        }
+        p,pre{
+            font-size:1.1rem;
+            color:gray;
+        }
+        section{
+            margin:1rem auto;
+            display: block;
+            width:100%;
+        }
+        .clear{
+            clear: both;
+        }
+        #multi_column .old div{
+            width:20rem;
+            float:left;
+        }
+        #multi_column .old .div1{
+            margin-right: 2rem;
+        }
+        #multi_column .old .div3,#multi_column .new .div3{
+            width:100%;
+            height: 100px;
+            background-color: cornflowerblue;
+        }
+        #multi_column .new .div1{
+            column-count: 3;
+            -webkit-column-count: 3;
+            -moz-column-count: 3;
+            column-width:10rem;
+            -moz-column-width: 10rem;
+            -webkit-column-width: 10rem;
+            column-gap: 2rem;
+            -webkit-column-gap: 2rem;
+            -moz-column-gap: 2rem;
+            column-rule:1px solid cornflowerblue;
+            -webkit-column-rule:1px solid cornflowerblue;
+            -moz-column-rule:1px solid cornflowerblue;
+        }
+
+        .left-sidebar,.right-sidebar{
+            width:12rem;
+            padding:20px;
+            background-color: cornflowerblue;
+            box-sizing: border-box;
+        }
+        .contents {
+            width: 17rem;
+            padding: 20px;
+            background-color: aquamarine;
+            box-sizing: border-box;
+        }
+        #box .old .left-sidebar,#box .old .contents,#box .old .right-sidebar{
+            float:left
+        }
+        #box .new .container{
+            display: -moz-box;
+            display: -webkit-box;
+        }
+        #flex .container{
+            display: flex;
+        }
+        #flex #one .contents,#flex #two .contents{
+            flex:1
+        }
+        #flex #two .left-sidebar{
+            order:3
+        }
+        #flex #two .left-sidebar:before{
+            content:"order:3"
+        }
+        #flex #two .right-sidebar{
+            order:2
+        }
+        #flex #two .right-sidebar:before{
+            content:"order:2"
+        }
+        #flex #two .contents{
+            order:1
+        }
+        #flex #two .contents:before{
+            content:"order:1"
+        }
+        #flex #three .container{
+            flex-direction: column;
+        }
+        #flex #four .container{
+            width: 600px;
+        }
+        #flex #four .left-sidebar,#flex #four .right-sidebar{
+            width:150px;
+            flex-grow:1;
+        }
+        #flex #four .contents{
+            width:150px;
+            flex-grow:3;
+        }
+        #flex #five .container{
+            width:600px;
+        }
+        #flex #five div{
+            width:200px;
+            text-align: center;
+            padding:20px 0;
+        }
+        #flex #five .wrap{
+            flex-wrap: wrap;
+        }
+        #flex #five .nowrap{
+            flex-wrap: nowrap;
+        }
+        #flex #five .wrap-reverse{
+            flex-wrap: wrap-reverse;
+        }
+        #flex #six .container{
+            border:4px solid cadetblue;
+            width:100%;
+            padding:0;
+        }
+        #flex #six div{
+            width:100px;
+            text-align: center;
+            padding:20px 0;
+        }
+        #flex #six .flex-start{
+            justify-content: flex-start;
+        }
+        #flex #six .flex-end{
+            justify-content: flex-end;
+        }
+        #flex #six .center{
+            justify-content: center;
+        }
+        #flex #six .space-between{
+            justify-content: space-between;
+        }
+        #flex #six .space-around{
+            justify-content: space-around;
+        }
+        #flex #seven .container{
+             border:4px solid cadetblue;
+             width:100%;
+             padding:0;
+             height: 70px;
+         }
+        #flex #seven div{
+            width:100px;
+            text-align: center;
+        }
+        #flex #seven .flex-start{
+            align-items: flex-start;
+        }
+        #flex #seven .flex-end{
+            align-items: flex-end;
+        }
+        #flex #seven .center{
+            align-items: center;
+        }
+        #flex #seven .baseline{
+            align-items: baseline;
+        }
+        #flex #seven .stretch{
+            align-items: stretch;
+        }
+        #flex #seven .self{
+            align-self: flex-end;
+        }
+        #flex #eight .container{
+            border:4px solid cadetblue;
+            width:600px;
+            padding:0;
+            height: 250px;
+            flex-wrap: wrap;
+        }
+        #flex #eight div{
+            width:160px;
+            text-align: center;
+            padding: 20px;
+        }
+        #flex #eight .flex-start{
+            align-content: flex-start;
+        }
+        #flex #eight .flex-end{
+            align-content: flex-end;
+        }
+        #flex #eight .center{
+            align-content: center;
+        }
+        #flex #eight .space-between{
+            align-content: space-between;
+        }
+        #flex #eight .space-around{
+            align-content: space-around;
+        }
+        #calc #container{
+            width:500px;
+            background-color: lightskyblue;
+        }
+        #calc .foo{
+            width:calc(50% + 100px);
+            background-color: cornflowerblue;
+            padding:10px 0;
+        }
+        button{
+            margin-top: 20px;
+            width:40px;
+            height: 40px;
+        }
+    </style>
+</head>
+<body>
+<section id="multi_column">
+    <h2>多栏布局</h2>
+    <section class="old">
+        <h3>css3以前的布局方式</h3>
+        <p>在用float或position布局时，由于每个div是相对独立的，因此在2个div内容量不一样时，将会出现
+        底部不能对其的情况，导致页面中多出一块空白区域</p>
+        <div class="div1">实例文字1，相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字
+            相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字
+            相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字</div>
+        <div class="div2">实例文字2，相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字</div>
+        <div class="div3">页面其他内容</div>
+    </section>
+    <div class="clear"></div>
+    <section class="new">
+        <h3>css3新增布局</h3>
+        <p>(Firefox浏览器中：“-moz-column-count” Chrome中“-webkit-columb-count”) <br>
+            column-count:将一个元素的内容分为多栏显示 <br>
+            with:为元素所用栏的总宽度 <br>
+            column-width:每一栏的宽度 (事实上伸缩时发下他是自缩放的 不造为什么)<br>
+            column-gap:多栏间的距离 <br>
+            column-rule:栏于栏间的一条间隔线，按照border属性来设置
+        </p>
+        <div class="div1">
+            实例文字1，相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字
+            相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字
+            相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字<br>
+            实例文字2，相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字</div>
+        <div class="div3">页面其他内容</div>
+    </section>
+</section>
+<section id="box">
+    <h2>盒布局</h2>
+    <section class="old">
+        <h3>css以前布局</h3>
+        <div class="container">
+            <div class="left-sidebar">
+                <h4>左侧边栏</h4>
+                <nav>
+                    <li>导航1</li>
+                    <li>导航2</li>
+                    <li>导航3</li>
+                </nav>
+            </div>
+            <div class="contents">
+                <h4>内容</h4>
+                实例文字，相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字
+                    相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字
+                    相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字
+                    相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字
+
+            </div>
+            <div class="right-sidebar">
+                <h4>右侧边栏</h4>
+                <nav>
+                    <li>导航1</li>
+                    <li>导航2</li>
+                </nav>
+            </div>
+        </div>
+    </section>
+    <div class="clear"></div>
+    <section class="new">
+        <h3>css新增布局box</h3>
+        <p>display:-moz-box/-webkit-box <br>
+            盒布局与多栏布局的区别：<br>
+            多栏的各栏宽度必须相等，栏间距也都是相等的，同时也不能具体制定显示什么内容，
+            比较适合使用在显示文章内容时。
+        </p>
+        <div class="container">
+            <div class="left-sidebar">
+                <h4>左侧边栏</h4>
+                <nav>
+                    <li>导航1</li>
+                    <li>导航2</li>
+                    <li>导航3</li>
+                </nav>
+            </div>
+            <div class="contents">
+                <h4>内容</h4>
+                实例文字，相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字
+                    相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字
+                    相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字
+                    相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字
+
+            </div>
+            <div class="right-sidebar">
+                <h4>右侧边栏</h4>
+                <nav>
+                    <li>导航1</li>
+                    <li>导航2</li>
+                </nav>
+            </div>
+        </div>
+    </section>
+</section>
+<section id="flex">
+    <h2>弹性盒布局（自缩放）</h2>
+    <section id="one">
+        <h3>内容区域随屏幕宽度自缩放</h3>
+        <p>display:flex <br>
+            #contents宽度修改为{flex:1}</p>
+        <div class="container">
+            <div class="left-sidebar">
+                <h4>左侧边栏</h4>
+                <nav>
+                    <li>导航1</li>
+                    <li>导航2</li>
+                    <li>导航3</li>
+                </nav>
+            </div>
+            <div class="contents">
+                <h4>内容</h4>
+                实例文字，相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字
+                相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字
+                相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字
+                相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字
+
+            </div>
+            <div class="right-sidebar">
+                <h4>右侧边栏</h4>
+                <nav>
+                    <li>导航1</li>
+                    <li>导航2</li>
+                </nav>
+            </div>
+        </div>
+    </section>
+    <section id="two">
+        <h3>改变元素的显示顺序</h3>
+        <p>display:flex <br>
+            order:number (按照order从小到大显示)
+        </p>
+        <div class="container">
+            <div class="left-sidebar">
+                <h4>左侧边栏</h4>
+                <nav>
+                    <li>导航1</li>
+                    <li>导航2</li>
+                    <li>导航3</li>
+                </nav>
+            </div>
+            <div class="contents">
+                <h4>内容</h4>
+                实例文字，相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字
+                相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字
+                相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字
+                相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字
+
+            </div>
+            <div class="right-sidebar">
+                <h4>右侧边栏</h4>
+                <nav>
+                    <li>导航1</li>
+                    <li>导航2</li>
+                </nav>
+            </div>
+        </div>
+    </section>
+    <section id="three">
+        <h3>改变元素的排列方向</h3>
+        <pre>
+display:flex
+flex-direction: row 横向排列 默认值
+                row-reverse 横向反方向
+                column 纵向排列
+                column-reverse 纵向反方向
+（排列时 contents未平铺浏览器，可能纵向时flex：1代表的是纵向的自伸缩）
+        </pre>
+        <div class="container">
+            <div class="left-sidebar">
+                <h4>左侧边栏</h4>
+                <nav>
+                    <li>导航1</li>
+                    <li>导航2</li>
+                    <li>导航3</li>
+                </nav>
+            </div>
+            <div class="contents">
+                <h4>内容</h4>
+                实例文字，相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字
+                相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字
+                相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字
+                相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字相对来说较长的文字
+
+            </div>
+            <div class="right-sidebar">
+                <h4>右侧边栏</h4>
+                <nav>
+                    <li>导航1</li>
+                    <li>导航2</li>
+                </nav>
+            </div>
+        </div>
+    </section>
+    <section id="four">
+        <h3>多个元素flex的缩放</h3>
+        <p>flex-grow: 子元素的with总和 < 容器的with，是放大处理时的参考因素 默认为1<br>
+            flex-shrink:子元素的with总和 > 容器的with，是缩小处理时的参考因素 默认为1<br>
+            例子是flex-grow的计算方法，flex-shrink类似，不过是在原基础上减去宽度 <br>
+            flex:flex-grow样式属性值 flex-shrink样式属性值 flex-basis属性值（width）<br>
+            当子元素横向排布时，调整子元素宽度；纵向排布时，调整子元素高度。
+        </p>
+        <div class="container">
+            <div class="left-sidebar">
+                <h4>左侧边栏</h4>
+                width = 150px <br>
+                flex:1 <br>
+                150 + 30 = 180
+            </div>
+            <div class="contents">
+                <h4>内容</h4>
+                width = 150px <br>
+                600(容器宽度）- 150*3(三个div子元素宽度的总和) = 150 <br>
+                150 /5(flex-grow值的总和) = 30 <br>
+                flex:3 <br>
+                150 + 30*3 = 240
+            </div>
+            <div class="right-sidebar">
+                <h4>右侧边栏</h4>
+                width = 150px <br>
+                flex:1 <br>
+                150 + 30 = 180
+            </div>
+        </div>
+    </section>
+    <section id="five">
+        <h3>控制换行方式</h3>
+        <pre>
+flex-wrap:nowrap        不换行
+          wrap          换行，前面的在上面
+          wrap-reverse  换行，前面的在下面
+简写：flex-flow: flex-direction flex-wrap
+        </pre>
+        <div class="container nowrap">
+            <div style="background-color: cornflowerblue">示例文字A</div>
+            <div style="background-color: aqua">示例文字B</div>
+            <div style="background-color: aquamarine">示例文字C</div>
+            <div style="background-color: lightskyblue">示例文字D</div>
+            <div style="background-color: lightblue">示例文字E</div>
+        </div>
+        <div class="container wrap">
+            <div style="background-color: cornflowerblue">示例文字A</div>
+            <div style="background-color: aqua">示例文字B</div>
+            <div style="background-color: aquamarine">示例文字C</div>
+            <div style="background-color: lightskyblue">示例文字D</div>
+            <div style="background-color: lightblue">示例文字E</div>
+        </div>
+        <div class="container wrap-reverse">
+            <div style="background-color: cornflowerblue">示例文字A</div>
+            <div style="background-color: aqua">示例文字B</div>
+            <div style="background-color: aquamarine">示例文字C</div>
+            <div style="background-color: lightskyblue">示例文字D</div>
+            <div style="background-color: lightblue">示例文字E</div>
+        </div>
+    </section>
+    <section id="six">
+        <h3>justify-content 属性,确定子元素在main axis轴方向上的排布</h3>
+        <p>当flex-grow属性不为0时，各子元素在main axis轴方向上自动填充，justify-content属性值无效</p>
+        <p>flex-start:从main-start开始布局所有子元素（默认）</p>
+        <div class="container flex-start">
+            <div style="background-color: cornflowerblue">示例文字A</div>
+            <div style="background-color: aqua">示例文字B</div>
+            <div style="background-color: aquamarine">示例文字C</div>
+            <div style="background-color: lightskyblue">示例文字D</div>
+            <div style="background-color: lightblue">示例文字E</div>
+        </div>
+        <p>flex-end:从main-end开始布局所有子元素</p>
+        <div class="container flex-end">
+            <div style="background-color: cornflowerblue">示例文字A</div>
+            <div style="background-color: aqua">示例文字B</div>
+            <div style="background-color: aquamarine">示例文字C</div>
+            <div style="background-color: lightskyblue">示例文字D</div>
+            <div style="background-color: lightblue">示例文字E</div>
+        </div>
+        <p>center:居中布局所有的元素</p>
+        <div class="container center">
+            <div style="background-color: cornflowerblue">示例文字A</div>
+            <div style="background-color: aqua">示例文字B</div>
+            <div style="background-color: aquamarine">示例文字C</div>
+            <div style="background-color: lightskyblue">示例文字D</div>
+            <div style="background-color: lightblue">示例文字E</div>
+        </div>
+        <p>space-between:在main-start布局第一个子元素，在main-end布局第二个子元素，将空白部分分配到所有子元素之间</p>
+        <div class="container space-between">
+            <div style="background-color: cornflowerblue">示例文字A</div>
+            <div style="background-color: aqua">示例文字B</div>
+            <div style="background-color: aquamarine">示例文字C</div>
+            <div style="background-color: lightskyblue">示例文字D</div>
+            <div style="background-color: lightblue">示例文字E</div>
+        </div>
+        <p>space-around:将空白部分分配到main-start与第一个子元素之间，所有元素之间，main-end与最后一个元素之间</p>
+        <div class="container space-around">
+            <div style="background-color: cornflowerblue">示例文字A</div>
+            <div style="background-color: aqua">示例文字B</div>
+            <div style="background-color: aquamarine">示例文字C</div>
+            <div style="background-color: lightskyblue">示例文字D</div>
+            <div style="background-color: lightblue">示例文字E</div>
+        </div>
+    </section>
+    <section id="seven">
+        <h3>align-items 设置cross axis轴方向上的对齐方式 align-self单独指定莫个元素的对齐方式</h3>
+        <p>flex-start:从cross-start开始布局所有子元素（默认）</p>
+        <div class="container flex-start">
+            <div style="background-color: cornflowerblue;height:20px">示例文字A</div>
+            <div style="background-color: aqua;height:30px">示例文字B</div>
+            <div style="background-color: aquamarine;height:40px">示例文字C</div>
+            <div style="background-color: lightskyblue;height:50px">示例文字D</div>
+            <div style="background-color: lightblue;height:60px">示例文字E</div>
+        </div>
+        <p>flex-end:从cross-end开始布局所有子元素</p>
+        <div class="container flex-end">
+            <div style="background-color: cornflowerblue;height:20px">示例文字A</div>
+            <div style="background-color: aqua;height:30px">示例文字B</div>
+            <div style="background-color: aquamarine;height:40px">示例文字C</div>
+            <div style="background-color: lightskyblue;height:50px">示例文字D</div>
+            <div style="background-color: lightblue;height:60px">示例文字E</div>
+        </div>
+        <p>center:居中布局所有的元素</p>
+        <div class="container center">
+            <div style="background-color: cornflowerblue;height:20px">示例文字A</div>
+            <div style="background-color: aqua;height:30px">示例文字B</div>
+            <div style="background-color: aquamarine;height:40px">示例文字C</div>
+            <div style="background-color: lightskyblue;height:50px">示例文字D</div>
+            <div style="background-color: lightblue;height:60px">示例文字E</div>
+        </div>
+        <p>baseline:沿内容的基线对齐</p>
+        <div class="container baseline">
+            <div style="background-color: cornflowerblue;height:20px">示例文字A</div>
+            <div style="background-color: aqua;height:30px">示例文字B</div>
+            <div style="background-color: aquamarine;height:40px">示例文字C</div>
+            <div style="background-color: lightskyblue;height:50px">示例文字D</div>
+            <div style="background-color: lightblue;height:60px">示例文字E</div>
+        </div>
+        <p>stretch:同一行的所有子元素高度被调整到最大。如果未指定任何子元素的高度，则所有子元素的高度最接近
+        容器高度（border）</p>
+        <div class="container stretch">
+            <div style="background-color: cornflowerblue">示例文字A</div>
+            <div style="background-color: aqua">示例文字B</div>
+            <div style="background-color: aquamarine">示例文字C</div>
+            <div style="background-color: lightskyblue">示例文字D</div>
+            <div style="background-color: lightblue;height:60px">示例文字E</div>
+        </div>
+        <p>align-self单独指定莫个元素的对齐方式（auto时继承父元素的align-items的值）</p>
+        <div class="container flex-start">
+            <div style="background-color: cornflowerblue;height:20px">示例文字A</div>
+            <div style="background-color: aqua;height:30px">示例文字B</div>
+            <div class="self" style="background-color: aquamarine;height:40px">示例文字C</div>
+            <div style="background-color: lightskyblue;height:50px">示例文字D</div>
+            <div style="background-color: lightblue;height:60px">示例文字E</div>
+        </div>
+    </section>
+    <section id="eight">
+        <h3>align-content 属性,确定各行在cross axis轴方向上的排布</h3>
+        <p>flex-start:从cross-start开始布局所有行（默认）</p>
+        <div class="container flex-start">
+            <div style="background-color: cornflowerblue">示例文字A</div>
+            <div style="background-color: aqua">示例文字B</div>
+            <div style="background-color: aquamarine">示例文字C</div>
+            <div style="background-color: lightskyblue">示例文字D</div>
+            <div style="background-color: lightblue">示例文字E</div>
+            <div style="background-color: lightskyblue">示例文字F</div>
+            <div style="background-color: lightcoral">示例文字G</div>
+            <div style="background-color: lightpink">示例文字H</div>
+            <div style="background-color: lightsalmon">示例文字I</div>
+        </div>
+        <p>flex-end:从cross-end开始布局所有行</p>
+        <div class="container flex-end">
+            <div style="background-color: cornflowerblue">示例文字A</div>
+            <div style="background-color: aqua">示例文字B</div>
+            <div style="background-color: aquamarine">示例文字C</div>
+            <div style="background-color: lightskyblue">示例文字D</div>
+            <div style="background-color: lightblue">示例文字E</div>
+            <div style="background-color: lightskyblue">示例文字F</div>
+            <div style="background-color: lightcoral">示例文字G</div>
+            <div style="background-color: lightpink">示例文字H</div>
+            <div style="background-color: lightsalmon">示例文字I</div>
+        </div>
+        <p>center:居中布局所有的行</p>
+        <div class="container center">
+            <div style="background-color: cornflowerblue">示例文字A</div>
+            <div style="background-color: aqua">示例文字B</div>
+            <div style="background-color: aquamarine">示例文字C</div>
+            <div style="background-color: lightskyblue">示例文字D</div>
+            <div style="background-color: lightblue">示例文字E</div>
+            <div style="background-color: lightskyblue">示例文字F</div>
+            <div style="background-color: lightcoral">示例文字G</div>
+            <div style="background-color: lightpink">示例文字H</div>
+            <div style="background-color: lightsalmon">示例文字I</div>
+        </div>
+        <p>space-between:在cross-start布局第一个行，在cross-end布局第二个行，将空白部分分配到所有行之间</p>
+        <div class="container space-between">
+            <div style="background-color: cornflowerblue">示例文字A</div>
+            <div style="background-color: aqua">示例文字B</div>
+            <div style="background-color: aquamarine">示例文字C</div>
+            <div style="background-color: lightskyblue">示例文字D</div>
+            <div style="background-color: lightblue">示例文字E</div>
+            <div style="background-color: lightskyblue">示例文字F</div>
+            <div style="background-color: lightcoral">示例文字G</div>
+            <div style="background-color: lightpink">示例文字H</div>
+            <div style="background-color: lightsalmon">示例文字I</div>
+        </div>
+        <p>space-around:将空白部分分配到cross-start与第一个行之间，所有元素之间，cross-end与最后一个元素之间</p>
+        <div class="container space-around">
+            <div style="background-color: cornflowerblue">示例文字A</div>
+            <div style="background-color: aqua">示例文字B</div>
+            <div style="background-color: aquamarine">示例文字C</div>
+            <div style="background-color: lightskyblue">示例文字D</div>
+            <div style="background-color: lightblue">示例文字E</div>
+            <div style="background-color: lightskyblue">示例文字F</div>
+            <div style="background-color: lightcoral">示例文字G</div>
+            <div style="background-color: lightpink">示例文字H</div>
+            <div style="background-color: lightsalmon">示例文字I</div>
+        </div>
+    </section>
+</section>
+<section id="calc">
+    <h2>calc()方法用来自动计算元素的宽度，高度等数值类型样式的属性值</h2>
+    <div id="container">
+        <div class="foo">width:calc(50%-100px)</div>
+    </div>
+    <button id="add">+</button>
+    <button id="sub">-</button>
+    <script>
+        window.onload = function () {
+            document.addEventListener('click',function (event) {
+                var container = document.getElementById('container');
+                var width = container.offsetWidth;
+                var target = event.target;
+                switch (target.id){
+                    case 'add':
+                        container.style.width = width + 100+"px";
+                        break;
+                    case 'sub':
+                        container.style.width = width - 100+"px";
+                        break;
+                }
+            })
+        }
+
+    </script>
+</section>
+</body>
+</html>

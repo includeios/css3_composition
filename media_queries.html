@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="width:600px;text/html;charset=UTF-8" name="viewport" >
+    <title>Media Qeries 相关样式</title>
+</head>
+<style>
+    body{
+        padding: 5%;
+    }
+    p{
+        width:100%;
+        font-size:1.1rem;
+        color:gray;
+        font-family: 楷体;
+    }
+    main{
+        background-color: aqua;
+    }
+    #sub01{
+        background-color: #2aabd2;
+    }
+    #sub02{
+        background-color: lightskyblue;
+    }
+    #container{
+        width:100%;
+        height:600px;
+    }
+    #wrapper{
+        display: flex;
+        width:100%;
+        height: 100%;
+    }
+    @media screen and (min-width: 1000px) {
+        #sub01{
+            width:200px;
+            margin-right: 2rem;
+        }
+        #sub02{
+            width:200px;
+            margin-left: 2rem;
+        }
+        Main{
+            flex-grow: 1;
+        }
+    }
+    @media screen and (min-width: 640px) and (max-width: 999px) {
+        #wrapper{
+            flex-wrap: wrap;
+        }
+        #sub01{
+            width:200px;
+            margin-right: 2rem;
+        }
+        Main{
+            flex-grow: 1;
+        }
+        #sub02{
+            margin-top: 10px;
+            width:100%;
+        }
+    }
+    @media only screen and (max-width: 639px) {
+        #wrapper{
+            flex-flow: column wrap;
+        }
+        #sub01 , #sub02,Main{
+            width:100%;
+            margin-bottom: 10px;
+        }
+    }
+</style>
+<body>
+<p>下面三个方块将在不同的屏幕尺寸下有不同的排列 <br>
+    @media 设备类型 and (设备属性) {} 注意空格，该有的地方一定要有 <br>
+    not和only关键字来进行筛选</p>
+<div id="container">
+    <div id="wrapper">
+        <nav id="sub01">Sub01</nav>
+        <main>Main</main>
+        <nav id="sub02">Sub02</nav>
+    </div>
+</div>
+</body>
+</html>

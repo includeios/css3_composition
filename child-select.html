@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>和孩子相关的选择器实例</title>
+    <style>
+        table{
+            width:200px;
+            height: 80px;
+            text-align: center;
+        }
+        /*ul元素的第奇数个元素如果是li时*/
+        li:nth-child(odd){
+            background-color: bisque;
+        }
+        li:nth-child(even){
+            background-color: aquamarine;
+        }
+        tr:nth-child(odd){
+            background-color: bisque;
+        }
+        tr:nth-child(even){
+            background-color: aquamarine;
+        }
+        /*table元素第奇数个tr元素*/
+        /*tr:nth-of-type(odd){
+
+        }*/
+        /*添加n来形成循环样式*/
+        #loop li:nth-last-child(4n){
+            background-color: aquamarine;
+        }
+        #loop li:nth-last-child(4n+3){
+            background-color:aqua;
+        }
+        #loop li:nth-last-child(4n+2){
+            background-color:deepskyblue;
+        }
+        #loop li:nth-last-child(4n+1){
+            background-color:dodgerblue;
+        }
+        /*only-child 也可以使用nth-of-type(1)和nth-last-of-type(1)
+        或 nth-child(1)和nth-last-child(1)来替代*/
+        li:only-child{
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li>第一个</li>
+    <li>第二个</li>
+    <li>第三个</li>
+    <li>第四个</li>
+</ul>
+<table border="1" cellspacing="0">
+    <tr>
+        <td>1.1</td>
+        <td>1.2</td>
+        <td>1.3</td>
+    </tr>
+    <tr>
+        <td>2.1</td>
+        <td>2.2</td>
+        <td>2.3</td>
+    </tr>
+    <tr>
+        <td>3.1</td>
+        <td>3.2</td>
+        <td>3.3</td>
+    </tr>
+    <tr>
+        <td>4.1</td>
+        <td>4.2</td>
+        <td>4.3</td>
+    </tr>
+</table>
+
+<ul id="loop">
+    <li>第一个</li>
+    <li>第二个</li>
+    <li>第三个</li>
+    <li>第四个</li>
+    <li>第一个</li>
+    <li>第二个</li>
+    <li>第三个</li>
+    <li>第四个</li>
+    <li>第一个</li>
+    <li>第二个</li>
+    <li>第三个</li>
+    <li>第四个</li>
+</ul>
+<ul>
+    <li>唯一一个子元素</li>
+</ul>
+</body>
+</html>

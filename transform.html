@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>transform变形处理</title>
+    <style>
+        body{
+            padding:0 5%;
+        }
+        p,pre{
+            width:100%;
+            font-size:1.1rem;
+            color:gray;
+            font-family: 楷体;
+        }
+        div{
+            margin-top: 5%;
+            width:500px;
+            padding: 20px 0;
+            background-color: lightskyblue;
+            text-align: center;
+        }
+        #scale{
+            transform: scale(0.5,2);
+        }
+        #rotate{
+            transform: rotate(45deg);
+        }
+        #skew{
+            transform: skew(30deg);
+        }
+        #translate{
+            transform: translate(500px);
+        }
+        #origin{
+            transform-origin: left bottom;
+            transform: rotate(45deg);
+        }
+    </style>
+</head>
+<body>
+    <div id="normal">正常的样子</div>
+    <div id="scale">缩放 scale(水平缩放比例，垂直缩放比例)</div>
+    <div id="rotate">旋转 rotate(旋转角度deg)</div>
+    <div id="skew">倾斜 skew(水平倾斜角度deg, 垂直倾斜角度deg)</div>
+    <div id="translate">移动 translate(水平方向上移动，垂直方向上移动)</div>
+<p>由于基准点的原因，同样的多重变形操作顺序不同，得到的结果也会不同 <br>
+transform-origin:基准点在元素水平位置上的方向(left center right)，基准点在元素垂直位置上的方向(top,center,bottom)</p>
+    <div id="origin">transform-origin: left bottom <br>transform: rotate(45deg);</div>
+</body>
+</html>

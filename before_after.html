@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>在页面中插入内容</title>
+    <style>
+        h3.new_pic:after{
+            content:url(../pic/mouse.PNG);
+            /*好像没法设置宽高*/
+            height: 20px;
+            width: 30px;
+            display: inline-block;
+            margin-top: 10px;
+            text-align: center;
+        }
+        img:after{
+            content:attr(alt);
+            display: block;
+            text-align: center;
+            margin-top: 5px;
+        }
+        #counter p:before{
+            content:counter(mycounter,upper-roman)'.';
+            font-weight: 700;
+            color:cornflowerblue;
+        }
+        #counter p{
+            counter-increment: mycounter;
+        }
+
+        #counter-nest h2:before{
+            content: counter(fstcounter)'.';
+        }
+        #counter-nest h2{
+            counter-increment: fstcounter;
+            counter-reset:subcounter;/*使副标题不在连续 而是在每一个大标题开始时重新计数*/
+            font-size:18px;
+            font-weight: 300;
+
+        }
+        #counter-nest h3:before{
+            content: counter(subcounter)'.';
+        }
+        #counter-nest h3{
+            counter-increment: subcounter;
+            margin-left: 40px;
+            font-size:15px;
+            font-weight: 300;
+        }
+        #symbol h1{
+            quotes:"\"" "\"";
+        }
+        #symbol h1:before{
+            content:open-quote;
+        }
+        #symbol h1:after{
+            content: close-quote;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h2>对after-before做详细解释：在页面中插入内容</h2>
+</header>
+<main>
+    <section>
+        <h3>none,normal</h3>
+        <p>E.classname:before/after{content:none}来取消一下添加，normal在after和before中
+        效果一样，其他的添加内容的选择器中只能用新属性normal</p>
+    </section>
+    <section>
+        <h3 class="new_pic">添加图片</h3>
+        <p>这种添加进来的图片没法修改其样式（高，宽）</p>
+        <h4 class="new_pic">将alt属性的值作为图像标题来显示</h4>
+        <p><img src="../pic/dragon.jpg" alt="一条龙" width="200px">
+            Pseudo::after element这个例子失败了 我也不造什么原因</p>
+    </section>
+    <article>
+        <header>
+            <h1>使用content属性来插入项目编号</h1>
+        </header>
+        <section id="counter">
+            <h1>在多个标题前加上连续编号+在项目编号中追加文字+指定样式+指定编号种类</h1>
+            <p>实例文字1</p>
+            <p>实例文字2</p>
+            <p>实例文字3</p>
+        </section>
+        <section>
+            <h1></h1>
+        </section>
+        <section id="counter-nest">
+            <h1>编号嵌套</h1>
+            <h2>大标题</h2>
+            <h3>中标题</h3>
+            <h3>中标题</h3>
+            <h3>中标题</h3>
+            <h2>大标题</h2>
+            <h3>中标题</h3>
+            <h3>中标题</h3>
+            <h3>中标题</h3>
+        </section>
+        <section id="symbol">
+            <h1>字符串两边添加嵌套文字符号</h1>
+        </section>
+    </article>
+</main>
+</body>
+</html>

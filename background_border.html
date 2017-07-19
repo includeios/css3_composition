@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>背景与边框样式</title>
+    <style>
+        body{
+            padding:5%;
+        }
+        p{
+            width:100%;
+            font-size:1.1rem;
+            color:gray;
+            font-family: 楷体;
+        }
+        #background div{
+            display: inline-block;
+            margin-right: 2rem;
+            width:300px;
+            text-align: center;
+            padding:30px 0;
+            background-color: lightskyblue;
+            border:dashed 5px cornflowerblue;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+        #clip div:nth-child(2){
+            -moz-background-clip: border;
+            -webkit-background-clip: border;
+        }
+        #clip div:nth-child(3){
+            -moz-background-clip: padding;
+            -webkit-background-clip: padding;
+        }
+        #origin div,#size div{
+            background-repeat: no-repeat;
+            background-image:url(../pic/mouse.PNG);
+        }
+        #origin div:nth-last-child(3){
+            -moz-background-origin: border;
+            -webkit-background-origin: border;
+        }
+        #origin div:nth-last-child(32){
+            -moz-background-origin: padding;
+            -webkit-background-origin: padding;
+        }
+        #origin div:nth-last-child(1){
+            -moz-background-origin: content;
+            -webkit-background-origin: content;
+        }
+        #size div:nth-last-child(1){
+            background-size: cover;
+        }
+        #size div:nth-last-child(2){
+            background-size: contain;
+        }
+        #size div:nth-last-child(3){
+            background-size: 50% 50%;
+        }
+        #size div:nth-last-child(4){
+            background-size: 60px auto;
+        }
+        #size div:nth-last-child(5){
+            background-size: 60px 60px;
+        }
+        #repeat div{
+            background-image:url(../pic/mouse.PNG);
+        }
+        #repeat div:nth-last-child(1){
+            background-repeat: round;
+        }
+        #repeat div:nth-last-child(2){
+            background-repeat: space;
+        }
+        #repeat div:nth-last-child(3){
+            background-repeat: repeat;
+        }
+        #more div{
+            background-image:url(../pic/mouse.PNG),url(../pic/dragon.jpg);
+            background-repeat:no-repeat , no-repeat;
+            background-size: auto auto,contain;
+            background-position:center center,0%;
+        }
+
+        #border span{
+            display: inline-block;
+            margin-right: 2rem;
+            width:300px;
+            text-align: center;
+            padding:10px 0;
+            background-color: lightskyblue;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            border:solid 5px cornflowerblue;
+        }
+        #radius main{
+            display: flex;
+        }
+        .left ,.right{
+            padding:0;
+            margin: 0;
+        }
+        .right{
+            display: flex;
+            align-items: center;
+        }
+        #radius .left span:nth-child(1){
+            border-radius:20px;
+        }
+        #radius .left span:nth-child(2){
+            border-radius:20px 40px
+        }
+        #radius .left span:nth-child(3){
+            border:none;
+            border-radius:20px;
+        }
+        #radius .left span:nth-child(4){
+            border-style: dashed;
+            border-radius:20px;
+        }
+        #radius .right span{
+            border-top-left-radius:10px;
+            border-top-right-radius:20px;
+            border-bottom-left-radius:30px;
+            border-bottom-right-radius:40px;
+        }
+        #border-image span:nth-child(1){
+            border-image:url(../pic/mouse.PNG) 10/20px repeat round;
+        }
+    </style>
+</head>
+<body>
+<div id="background">
+    <section id="clip">
+        <p>background-clip:确定背景范围 border 背景范围包括边框区域 padding 不包括</p>
+        <div>
+            border
+        </div>
+        <div>
+            padding
+        </div>
+    </section>
+    <section id="origin">
+        <p>background-origin:指定背景图像的绘制起点 <br>
+            border从边框左上角 padding 从内部补白区域左上角 content 内容的左上角</p>
+        <div>
+            border
+        </div>
+        <div>
+            padding
+        </div>
+        <div>
+            content
+        </div>
+    </section>
+    <section id="size">
+        <p>background-size 指定背景图形的尺寸 <br>
+            auto指定另一个参数后该参数按照原图形缩放 % 占容纳盒子的百分比 <br>
+            contain将原图像按照比例放大或缩小，以使原始图像的宽度或高度等于容纳盒子的宽度或高度（图形被完整显示）<br>
+            cover:按照比例放大填充盒子，如果有多余部分，多余部分被削去
+        </p>
+        <div>
+            60px 60px
+        </div>
+        <div>
+            60px auto
+        </div>
+        <div>
+            50% 50%
+        </div>
+        <div>
+            contain
+        </div>
+        <div>
+            cover
+        </div>
+    </section>
+    <section id="repeat">
+        <p>background-repeat 新增属性space和round <br>
+            no-repeat repeat repeat-x repeat-y 对超出容纳盒子的图像直接裁剪<br>
+            space:自动调整图像与图像间的间距<br>
+            round:自动调整北京图像的尺寸
+        </p>
+        <div>
+            repeat
+        </div>
+        <div>
+            space
+        </div>
+        <div>
+            round
+        </div>
+    </section>
+    <section id="more">
+        <p>在一个容纳盒子中显示多张背景图片 <br>
+            指定url或者格式时 用，分割，第一个图片文件是放在最上面的，最后一张放在最下面
+        </p>
+        <div>
+            image:url(mouse),url(dragon);
+            size: auto auto,contain;
+            position:center center,0%;
+        </div>
+    </section>
+</div>
+<div id="border">
+    <section id="radius">
+        <p>border-radius:绘制圆角边框</p>
+        <main>
+            <div class="left">
+                <span>
+                    border-radius:20px
+                </span>
+                <span>
+                    border-radius:20px 40px
+                </span>
+                <span>
+                    border:none;
+                    border-radius:20px;
+                </span>
+                <span>
+                    border:dashed 5px ...;
+                    border-radius:20px;
+                </span>
+            </div>
+            <div class="right" >
+                <span style="padding:30px 0;">
+                    border-top-left-radius:10px;
+                    border-top-right-radius:20px
+                    border-bottom-left-radius:30px
+                    border-bottom-right-radius:40px
+                </span>
+            </div>
+        </main>
+    </section>
+    <section id="border-image">
+        <span>
+            border-image:url(path) A B C D/border-width topAndBottom leftAndRight;
+        </span>
+    </section>
+</div>
+</body>
+</html>

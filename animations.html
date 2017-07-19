@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>css3动画效果</title>
+</head>
+<style>
+    p,pre{
+        width:100%;
+        font-size:1.1rem;
+        color:gray;
+        font-family: 楷体;
+    }
+    #transition{
+        width:300px;
+        text-align: center;
+        line-height: 240px;
+        height: 240px;
+        background-color: lightblue;
+        margin-left: 5%;
+        transition: background-color 2s linear,margin-left 3s ease;
+    }
+    #transition:hover{
+        background-color: cornflowerblue;
+        margin-left: 50%;
+    }
+    @keyframes  run{
+        30%{
+            background-color: cornflowerblue;
+            margin-left: 50%;
+        }
+        50%{
+            margin-top: 30%;
+        }
+        80%{
+            margin-left: 30%;
+        }
+        100%{
+            margin-left: 5%;
+            margin-top: 5%;
+            background-color: lightblue;
+        }
+    }
+    #animation{
+        width:300px;
+        text-align: center;
+        line-height: 240px;
+        height: 240px;
+        background-color: lightblue;
+        margin-left: 5%;
+    }
+    #animation:active{
+        animation: run 5s linear infinite alternate;
+    }
+    @keyframes fadein {
+        0%{
+            opacity: 0;
+        }
+        100%{
+            opacity:1;
+        }
+    }
+    body{
+        animation:fadein 5s linear;
+    }
+</style>
+<body>
+<pre>
+    transition-property:对哪个属性进行平滑过渡
+    transition-duration:过渡时间
+    transition-timing-function:过渡方法 line 线性过渡 ease 先慢后快再慢
+    transition-delay:延迟多长时间后执行
+    transition:property duration timing-function
+</pre>
+<div id="transition">
+    鼠标移动到此处后开始出现效果
+</div>
+<pre>
+    @keyframes 关键帧集合名{
+        n%{
+            //在动画进行到进度n时的样式代码
+        }
+    }
+    animation-name:关键帧集合名
+    animation-duration:完成整个动画需要的时间
+    animation-timing-function:完成方式
+    animation-delay:延迟时间
+    animation-iteration-count:执行次数（infinite 无限次）
+    animation-direction:执行方向
+                normal:执行完后返回初始状态
+                alternate:交替执行完毕后返回的方向
+                reverse:反方向执行动画
+                alternate-reverse:从反方向开始交替更改动画的执行方向
+    animation:keyframe名字 duration timing-function delay iteration-count direction
+</pre>
+<div id="animation">
+    鼠标点击此处后开始动画
+</div>
+</body>
+</html>

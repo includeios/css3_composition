@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>UI元素状态伪类选择器</title>
+    <style>
+        body{
+            padding: 20px;
+        }
+        table{
+            width:80%;
+            height: 80px;
+            text-align: center;
+            margin-left: 10%;
+        }
+        table input{
+            width:100%;
+            border-style: none;
+            height: 100%;
+        }
+        span{
+            display: inline-block;
+            width:20px;
+            height: 15px;
+        }
+        input:hover{
+            background-color: aquamarine;
+        }
+        input:active{
+            background-color: aqua;
+        }
+        td:focus{
+            background-color: deepskyblue;
+        }
+        /*元素被选中时样式*/
+        p::selection{
+            background: gray;
+            color:lightblue;
+        }
+        /*invalid 元素没用通过html5设定的检查时的样子
+            valid 元素通过*/
+        /*required 允许指定required属性，且指定了
+          optional 允许指定required属性  且没有指定*/
+/*
+        #required input[required*="required"]:after{
+
+            border-color: red;
+        }*/
+        /*in-range 元素有效值限定在一定范围内 且实际输入在范围内
+            out-of-range 。。。。。。。。。。且实际输入超出了范围
+        */
+    </style>
+</head>
+<body>
+<p>下面这个表格：<wbr>在鼠标移动到元素上时（hover）
+    <span style="background-color: aquamarine"></span><wbr>
+    ，在鼠标按下没有松开时（激活）（active)
+    <span style="background-color: aqua"></span><wbr>
+    ，在鼠标选中时（获得焦点）focus，
+    <span style="background-color: deepskyblue"></span>
+</p>
+<table border="1" cellspacing="0">
+    <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+    </tr>
+    <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+    </tr>
+</table>
+<div id="required">
+    <input type="text" required="required">
+    <br>
+    <input type="text">
+</div>
+<form>
+    <input type="radio" id="radio1" name="radio" >可用
+    <input type="radio" id=radio2 name="radio" checked>不可用
+    <input type="text" id="text1" disabled>
+    <style type="text/css">
+        /*当元素处于可用状态时*/
+        form input[type="text"]:enabled{
+            background-color: antiquewhite;
+        }
+        /*当元素处于不可用状态时*/
+        form input[type='text']:disabled{
+            background-color: black;
+        }
+        /*read-only read-write*/
+        /*checked 选中时样式 default 页面打开处于默认选择状态的样式 之后不随取消而消失
+         indeterminate 页面打开没有默认选择时样式  之后随选中而消失*/
+        input[type="radio"]:checked{
+            outline:2px solid red;
+        }
+        input[type="radio"]:default{
+            outline:2px solid dodgerblue;
+        }
+        input[type="radio"]:indeterminate{
+            outline:2px solid red;
+        }
+    </style>
+    <script type="text/javascript">
+        var form = document.forms[0];
+        var radio1 = document.getElementById('radio1');
+        var text1 = document.getElementById('text1');
+        form.addEventListener('change',function(){
+            if(radio1.checked){
+                text1.disabled=""
+            }
+            else{
+                text1.disabled="disabled"
+            }
+        })
+    </script>
+</form>
+
+<div id="brother">
+    <p>div中的子元素</p>
+    <p>div中的子元素</p>
+</div>
+<p>div之后的兄弟元素</p>
+<p>div之后的兄弟元素</p>
+<p>div之后的兄弟元素</p>
+<div>
+    <p>div中的子元素</p>
+    <p>div中的子元素</p>
+</div>
+<style>
+    /* ~ 对之后的同级兄弟元素指定样式*/
+    #brother ~ p{
+        background-color: aquamarine;
+    }
+</style>
+</body>
+</html>

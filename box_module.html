@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>盒子模型</title>
+    <style>
+        div{
+            word-wrap:break-word;
+        }
+        #one .A,#one .B{
+            display: block;
+            float:left;
+            width:200px;
+        }
+        .A{
+            background-color: aquamarine;
+        }
+        .B{
+            background-color: aqua;
+        }
+        .C{
+            width:400px;
+            background-color: cornflowerblue;
+        }
+        #two .A,#two .B{
+            display: block;
+            float:left;
+            width:200px;
+        }
+        #two .C{
+            clear: both;
+        }
+        #three div{
+            display: inline-block;
+            width:200px;
+            vertical-align: top;
+        }
+        #four ul{
+            margin: 0 auto;
+            display: block;
+            width:408px;
+            padding: 0;
+        }
+        #four li{
+            display: inline-block;
+            width:100px;
+            padding: 10px 0;
+            background-color: cornflowerblue;
+            text-align: center;
+            border: solid 1px aqua;
+        }
+        #five div{
+            display: list-item;
+            list-style-type: circle;
+            margin-left: 40px;
+        }
+        #six table{
+            display: inline-table;
+            vertical-align: bottom;
+        }
+        #seven p{
+            width:300px;
+            height: 100px;
+            border:solid 1px aqua;
+        }
+        #seven #hidden{
+            overflow: hidden;
+        }
+        #seven #scroll{
+            overflow: scroll;
+        }
+        #seven #auto{
+            overflow: auto;
+        }
+        #seven #visible{
+            overflow: visible;
+        }
+        #seven #text-overflow{
+            height: 20px;
+            width:300px;
+            overflow: hidden;
+            text-overflow:ellipsis;
+            white-space: nowrap;
+            border:solid 1px aqua;
+        }
+        #box-shadow{
+            width:200px;
+            height: 80px;
+            margin: 0 0 150px 200px;
+            box-shadow: 5px 5px 5px cornflowerblue,
+                        50px 50px 5px lightblue,
+                        -50px 50px 5px lightcoral;
+            background-color: cadetblue;
+        }
+        #inset-shadow{
+            width:200px;
+            height: 80px;
+            margin: 0 0 50px 200px;
+            background-color: cadetblue;
+            box-shadow: inset 0 0 5px 5px lightblue;
+        }
+        #select-shadow:first-line{
+            font-size: 20px;
+            background-color: cadetblue;
+            box-shadow: 5px 5px 5px lightblue;
+        }
+        #box-sizing div{
+            width:300px;
+            height: 20px;
+            border:solid 30px aqua;
+            margin: 20px auto;
+            padding: 40px;
+            background-color: aquamarine;
+        }
+        #box-sizing #border-box{
+            box-sizing: border-box;
+        }
+        #box-sizing #padding-box{
+            box-sizing: padding-box;
+        }
+    </style>
+</head>
+<body>
+<section id="one">
+    <h3>float并列显示示例</h3>
+    <div class="A">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</div>
+    <div class="B">BBBBBBBBBB</div>
+    <div class="C">CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC</div>
+</section>
+<section id="two">
+    <h3>float并列显示示例+clear</h3>
+    <div class="A">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</div>
+    <div class="B">BBBBBBBBBB</div>
+    <div class="C">CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC</div>
+</section>
+<section id="three">
+    <h3>使用inline-block显示并列</h3>
+    <div class="A">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</div>
+    <div class="B">BBBBBBBBBB</div>
+    <div class="C">CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC</div>
+</section>
+<section id="four">
+    <h3>使用inline实现水平菜单，同时去掉前面的圆圈</h3>
+    <ul>
+        <li>菜单一</li><li>菜单二</li><li>菜单三</li><li>菜单四</li>
+    </ul>
+</section>
+<section id="five">
+    <h3>使用list-item类型，将多个元素作为列表来显示</h3>
+    <div>示例div1</div>
+    <div>示例div2</div>
+    <div>示例div3</div>
+    <div>示例div4</div>
+</section>
+<section id="six">
+    <h3>使用inline-table类型，将表格与其他元素显示在同一行</h3>
+    你好
+    <table border="1" cellspacing="0">
+        <tr>
+            <td>A</td><td>B</td><td>C</td><td>D</td>
+        </tr>
+        <tr>
+            <td>E</td><td>F</td><td>G</td><td>H</td>
+        </tr>
+        <tr>
+            <td>I</td><td>J</td><td>K</td><td>L</td>
+        </tr>
+    </table>
+    表格
+</section>
+<section id="seven">
+    <h3>overfloaw 对于表格容纳不下的内容显示</h3>
+    <section>
+        <h4>hidden 超出范围的文字隐藏起来</h4>
+        <p id="hidden">
+            示例文字示例文字示例文字示例文字示例文字示例文字
+            示例文字示例文字示例文字示例文字示例文字示例文字
+            示例文字示例文字示例文字示例文字示例文字示例文字
+            示例文字示例文字示例文字示例文字示例文字示例文字
+        </p>
+    </section>
+    <section>
+        <h4>scroll 出现固定的水平和垂直滚动条 滚动条添加在容器内部</h4>
+        <p id="scroll">
+            示例文字示例文字示例文字示例文字示例文字示例文字
+            示例文字示例文字示例文字示例文字示例文字示例文字
+            示例文字示例文字示例文字示例文字示例文字示例文字
+            示例文字示例文字示例文字示例文字示例文字示例文字
+        </p>
+    </section>
+    <section>
+        <h4>auto 根据需要出现水平和垂直滚动条 滚动条添加在容器内部</h4>
+        <p id="auto">
+            示例文字示例文字示例文字示例文字示例文字示例文字
+            示例文字示例文字示例文字示例文字示例文字示例文字
+            示例文字示例文字示例文字示例文字示例文字示例文字
+            示例文字示例文字示例文字示例文字示例文字示例文字
+        </p>
+    </section>
+    <section>
+        <h4>visible 与不适用overflow效果一样，超出部分溢出容器</h4>
+        <p id="visible">
+            示例文字示例文字示例文字示例文字示例文字示例文字
+            示例文字示例文字示例文字示例文字示例文字示例文字
+            示例文字示例文字示例文字示例文字示例文字示例文字
+            示例文字示例文字示例文字示例文字示例文字示例文字
+            overflow-x属性与overflow-y属性单独在指定的水平方向或垂直方向上设置显示方式
+        </p>
+    </section>
+    <section style="margin-top: 100px">
+        <h4>text-overflow 盒子的内容在水平方向上超出盒的容纳范围时有效</h4>
+        <p id="text-overflow">这是一句不换行的很长的话的话的话的话dddd</p>
+    </section>
+</section>
+<section >
+    <h3>box-shadow盒子阴影</h3>
+    <div id="box-shadow"></div>
+    盒内阴影
+    <div id="inset-shadow"></div>
+    与选择器结合使用阴影
+    <div id="select-shadow">
+        第一行文字 <br>
+        第二行文字
+    </div>
+</section>
+<section id="box-sizing">
+    <h3>box-sizing 指定盒子的宽度与高度的计算方式</h3>
+    <section>
+        <h4>content-box 默认指定，width设置的为内容的宽度，盒子的实际宽度是width+2*padding+2*border</h4>
+        <div id="content-box">a b c d e f g h i g k l m n o p q r s t u v w x y z</div>
+    </section>
+    <section>
+        <h4>border-box width为盒子的宽度，内容的实际宽度为width-2*border-2*padding</h4>
+        <div id="border-box">a b c d e f g h i g k l m n</div>
+    </section>
+    <section>
+        <h4>padding-box Firefox浏览器支持with 为content+padding宽度 盒子的实际宽度为width+2*border 内容实际宽度为width-2*padding</h4>
+        <div id="padding-box">a b c d e f g h i g k l m n o p q r s t u v w x y z</div>
+    </section>
+</section>
+</body>
+</html>

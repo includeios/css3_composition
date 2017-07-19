@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文字与字体相关样式</title>
+    <style>
+        #shadow{
+            text-shadow: 5px 5px 5px aquamarine,
+                         55px 15px 2px aquamarine,
+                         -45px 15px 2px aquamarine;
+            color:aqua;
+            font-size: 3rem;
+            font-weight: bold;
+            font-family:宋体;
+            margin: 50px;
+        }
+        #break-word{
+            word-wrap: break-word;
+        }
+       /* @font-face {
+            font-family: MyStyle;
+            src:local("Helvetica Neue"),
+            url(MgOpenModernaRegular.ttf);
+        }
+        p{
+            font-family: MyStyle;
+            font-size: 21.1rem;
+        }*/
+        .style1{
+            font-family: Comic Sans MS;
+            font-size:16px;
+            font-size-adjust: 0.54;
+        }
+        .style2{
+            font-family: "Times New Roman";
+            font-size:16px;
+            font-size-adjust: 0.46;
+        }
+    </style>
+
+</head>
+<body>
+<article>
+    <header>
+        <h1 id="shadow">字体的阴影</h1>
+        <h2 id="break-word">thisisvaryvarylongwordnowmakethisturnline</h2>
+    </header>
+    <p class="style1">font-size-adjust在改变字体样式的时候来保持字体大小不变
+        text sample text sample text sample text sample <br>
+        px:屏幕设备物理上能显示出最小的点，宽度根据设备改变而改变 <br>
+        em:根据元素的父元素的字体大小而计算出来的实际值，（一般html默认的大小为16px）在元素从一个父元素移动到另一个父元素
+        时需要重新计算，而且在嵌套深的元素中计算麻烦 <br>
+        rem:根据页面上的根元素来计算大小
+    </p>
+</article>
+</body>
+</html>
